@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group relative cursor-pointer min-h-[520px]"
+    class="group relative cursor-pointer min-h-[500px] md:min-h-[550px]"
     @click="$emit('select', path.title)"
   >
     <div
@@ -12,7 +12,7 @@
       ]"
     ></div>
     <div
-      class="relative bg-gray-900 p-4 transform transition-all duration-300 hover:scale-105 h-full"
+      class="relative bg-gray-900 p-4 transform transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 h-full"
     >
       <div class="flip-card h-full" :class="{ 'is-flipped': path.isFlipped }">
         <div class="flip-card-inner">
@@ -21,7 +21,7 @@
             <img
               :src="path.image"
               :alt="path.title"
-              class="w-full h-[420px] object-cover mb-4"
+              class="w-full h-[320px] md:h-[400px] object-cover mb-4"
             />
             <p class="text-sm text-gray-400 font-mono flex-1">
               {{ path.description }}
