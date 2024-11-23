@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-black text-red-500 flex flex-col font-tech-mono">
     <!-- Header -->
-    <header class="p-6 text-center">
+    <header class="p-4 text-center">
       <h1 class="text-2xl text-cyan-400 md:text-4xl tracking-wider mb-2">
         V'S LIFEPATH
       </h1>
@@ -12,8 +12,8 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl w-full">
+    <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl w-full">
         <div
           v-for="path in lifePaths"
           :key="path.title"
