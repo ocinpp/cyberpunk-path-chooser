@@ -81,6 +81,11 @@ defineEmits(["select"]);
   -webkit-backface-visibility: hidden;
 }
 
+/* Firefox issue of having a line at the right */
+.is-flipped .flip-card-front {
+  transform: scale(0.99);
+}
+
 .flip-card-back {
   transform: rotateY(180deg);
   background-color: rgb(17, 24, 39);
