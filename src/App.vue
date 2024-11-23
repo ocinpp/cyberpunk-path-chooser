@@ -23,20 +23,48 @@
           @click="selectPath(path.title)"
         >
           <div
-            class="absolute inset-0 border-2 border-red-500/30 transform skew-x-2 transition-all duration-300 group-hover:border-red-500/70"
+            :class="[
+              'absolute inset-0 border-2 border-red-500/30 transform skew-x-2 transition-all duration-300',
+              selectedPath === path.title
+                ? 'border-cyan-400 border-4'
+                : 'group-hover:border-red-500/70',
+            ]"
           ></div>
           <div
-            class="relative bg-gray-900 p-4 transform transition-all duration-300 hover:scale-105"
+            class="relative bg-gray-900 p-4 transform transition-all duration-300 hover:scale-105 h-full"
           >
-            <h2 class="text-xl md:text-2xl font-mono mb-4">{{ path.title }}</h2>
-            <img
-              :src="path.image"
-              :alt="path.title"
-              class="w-full h-[400px] object-cover mb-4"
-            />
-            <p class="text-sm text-gray-400 font-mono">
-              {{ path.description }}
-            </p>
+            <div
+              class="flip-card-inner"
+              :class="{ 'is-flipped': path.isFlipped }"
+            >
+              <div class="flip-card-front">
+                <h2 class="text-xl md:text-2xl font-mono mb-4">
+                  {{ path.title }}
+                </h2>
+                <img
+                  :src="path.image"
+                  :alt="path.title"
+                  class="w-full h-[300px] object-cover mb-4"
+                />
+                <p class="text-sm text-gray-400 font-mono">
+                  {{ path.description }}
+                </p>
+              </div>
+              <div class="flip-card-back">
+                <h2 class="text-xl md:text-2xl font-mono mb-4">
+                  {{ path.title }} - Background
+                </h2>
+                <p class="text-sm text-gray-400 font-mono">
+                  {{ path.background }}
+                </p>
+              </div>
+            </div>
+            <button
+              @click.stop="flipCard(path)"
+              class="mt-4 px-3 py-1 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300"
+            >
+              {{ path.isFlipped ? "Show Front" : "Show Back" }}
+            </button>
           </div>
         </div>
       </div>
@@ -74,18 +102,27 @@ const lifePaths = ref([
     image: "/placeholder-1.png?height=400&width=300",
     description:
       "Roam the Badlands, living by your own rules in a tight-knit nomad clan.",
+    background:
+      "As a Nomad, you've grown up in the Badlands, part of a nomadic clan that values family, loyalty, and freedom above all else. Your life has been one of constant movement, scavenging, and survival.",
+    isFlipped: false,
   },
   {
     title: "Streetkid",
     image: "/placeholder-2.png?height=400&width=300",
     description:
       "Grow up on the streets, knowing every back alley and fixer in Night City.",
+    background:
+      "Born and raised in Night City's urban jungle, you've seen it all. From gang wars to corporate schemes, you've learned to survive by your wits and street smarts.",
+    isFlipped: false,
   },
   {
     title: "Corpo",
     image: "/placeholder-3.png?height=400&width=300",
     description:
       "Climb the corporate ladder in the ruthless world of mega-corporations.",
+    background:
+      "You've spent your life climbing the ranks of a powerful corporation, navigating office politics and corporate espionage. The world of high finance and power plays is your natural habitat.",
+    isFlipped: false,
   },
 ]);
 
@@ -93,6 +130,10 @@ const selectedPath = ref(null);
 
 const selectPath = (path) => {
   selectedPath.value = path;
+};
+
+const flipCard = (path) => {
+  path.isFlipped = !path.isFlipped;
 };
 </script>
 
@@ -119,5 +160,31 @@ const selectPath = (path) => {
     transparent 2px
   );
   pointer-events: none;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
 }
 </style>
