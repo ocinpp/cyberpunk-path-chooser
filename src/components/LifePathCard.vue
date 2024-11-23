@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group relative cursor-pointer min-h-[500px]"
+    class="group relative cursor-pointer min-h-[520px]"
     @click="$emit('select', path.title)"
   >
     <div
