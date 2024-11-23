@@ -5,9 +5,9 @@
   >
     <div
       :class="[
-        'absolute inset-0 border-2 border-red-500/30 transform skew-x-3 transition-all duration-300',
+        'absolute inset-0 border-2 border-red-500/30 transform skew-x-2 transition-all duration-300',
         isSelected
-          ? 'border-sky-400 border-4'
+          ? 'border-sky-400 border-4 skew-x-3'
           : 'group-hover:border-red-500/70',
       ]"
     ></div>
