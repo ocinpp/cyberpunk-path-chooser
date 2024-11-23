@@ -4,15 +4,15 @@
     @click="$emit('select', path.title)"
   >
     <div
+      class="absolute inset-0 border-2 border-red-500/30 transform transition-all duration-300"
       :class="[
-        'absolute inset-0 border-2 border-red-500/30 transform skew-x-2 transition-all duration-300',
         isSelected
-          ? 'border-sky-400 border-4 skew-x-3'
-          : 'group-hover:border-red-500/70',
+          ? 'border-sky-400 border-3 scale-[1.02] group-hover:scale-[1.05]'
+          : 'group-hover:border-red-500/70 group-hover:scale-[1.05]',
       ]"
     ></div>
     <div
-      class="relative bg-gray-900 p-4 transform transition-all duration-300 hover:scale-[1.02] md:hover:scale-105 h-full"
+      class="relative bg-gray-900 p-4 transform transition-all duration-300 hover:scale-[1.01] md:hover:scale-[1.04] h-full"
     >
       <div class="flip-card h-full" :class="{ 'is-flipped': path.isFlipped }">
         <div class="flip-card-inner">
