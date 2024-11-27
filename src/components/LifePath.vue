@@ -15,7 +15,7 @@
     <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl w-full">
         <div
-          v-for="path in lifePaths"
+          v-for="(path, index) in lifePaths"
           :key="path.title"
           class="relative flex flex-col gap-4"
         >
@@ -23,10 +23,20 @@
             :path="path"
             :is-selected="selectedPath === path.title"
             @select="selectPath"
+            @keydown.enter="selectPath(path.title)"
+            @keydown.space.prevent="selectPath(path.title)"
+            :tabindex="0"
+            :aria-selected="selectedPath === path.title"
+            :aria-label="`Select ${path.title} lifepath`"
           />
           <button
             @click.stop="flipCard(path)"
+            @keydown.enter="flipCard(path)"
+            @keydown.space.prevent="flipCard(path)"
             class="w-full px-3 py-1 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300"
+            :aria-label="`${path.isFlipped ? 'Show front' : 'Show back'} of ${
+              path.title
+            } card`"
           >
             {{ path.isFlipped ? "Show Front" : "Show Back" }}
           </button>
@@ -42,6 +52,8 @@
       <div class="flex gap-4">
         <button
           @click="resetSelection"
+          @keydown.enter="resetSelection"
+          @keydown.space.prevent="resetSelection"
           class="px-4 py-2 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300"
         >
           BACK
@@ -49,12 +61,15 @@
         <button
           :disabled="!selectedPath"
           @click="confirmSelection"
+          @keydown.enter="confirmSelection"
+          @keydown.space.prevent="confirmSelection"
           :class="[
             'px-4 py-2 transition-colors duration-300',
             selectedPath
               ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
               : 'bg-gray-500/10 text-gray-400 cursor-not-allowed',
           ]"
+          :aria-disabled="!selectedPath"
         >
           SELECT
         </button>
@@ -120,7 +135,7 @@ const flipCard = (path) => {
 };
 </script>
 
-<style>
+<style scoped>
 /* Add some cyberpunk-style scan lines */
 .bg-black::before {
   content: "";
@@ -137,7 +152,6 @@ const flipCard = (path) => {
     transparent 2px
   );
   pointer-events: none;
-  z-index: 1;
 }
 
 /* Font face declaration */

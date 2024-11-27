@@ -1,18 +1,24 @@
 <template>
   <div
-    class="group relative cursor-pointer min-h-[500px] md:min-h-[550px]"
+    class="group relative cursor-pointer min-h-[500px] md:min-h-[550px] focus:outline-none"
     @click="$emit('select', path.title)"
+    @keydown.enter="$emit('select', path.title)"
+    @keydown.space.prevent="$emit('select', path.title)"
+    :tabindex="0"
+    :aria-selected="isSelected"
+    :aria-label="`Select ${path.title} lifepath`"
+    role="option"
   >
     <div
-      class="absolute inset-0 border-2 border-red-500/30 transform transition-all duration-300"
+      class="absolute inset-0 border-2 border-red-500/30 transform transition-all duration-300 group-focus-visible:scale-[1.05]"
       :class="[
         isSelected
           ? 'border-sky-400 border-3 scale-[1.02] group-hover:scale-[1.05]'
-          : 'group-hover:border-red-500/70 group-hover:scale-[1.05]',
+          : 'group-hover:border-red-500/70 group-hover:scale-[1.05] group-focus-visible:border-red-500/70',
       ]"
     ></div>
     <div
-      class="relative bg-gray-900 p-4 transform transition-all duration-300 hover:scale-[1.01] md:hover:scale-[1.04] h-full"
+      class="relative bg-gray-900 p-4 transform transition-all duration-300 hover:scale-[1.01] md:hover:scale-[1.04] group-focus-visible:scale-[1.01] md:group-focus-visible:scale-[1.04] h-full"
     >
       <div class="flip-card h-full" :class="{ 'is-flipped': path.isFlipped }">
         <div class="flip-card-inner">
@@ -20,7 +26,7 @@
             <h2 class="text-xl md:text-2xl font-mono mb-4">{{ path.title }}</h2>
             <img
               :src="path.image"
-              :alt="path.title"
+              :alt="`${path.title} lifepath illustration`"
               class="w-full h-[320px] md:h-[400px] object-cover mb-4"
             />
             <p class="text-sm text-gray-400 font-mono flex-1">
