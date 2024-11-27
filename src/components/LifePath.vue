@@ -33,7 +33,7 @@
             @click.stop="flipCard(path)"
             @keydown.enter="flipCard(path)"
             @keydown.space.prevent="flipCard(path)"
-            class="w-full px-3 py-1 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300"
+            class="w-full px-3 py-1 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300 focus:outline-none focus-visible:bg-cyan-500/20 focus:ring-2"
             :aria-label="`${path.isFlipped ? 'Show front' : 'Show back'} of ${
               path.title
             } card`"
@@ -54,7 +54,7 @@
           @click="resetSelection"
           @keydown.enter="resetSelection"
           @keydown.space.prevent="resetSelection"
-          class="px-4 py-2 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300"
+          class="px-4 py-2 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300 focus:outline-none focus-visible:bg-cyan-500/20 focus:ring-2"
         >
           BACK
         </button>
@@ -64,9 +64,9 @@
           @keydown.enter="confirmSelection"
           @keydown.space.prevent="confirmSelection"
           :class="[
-            'px-4 py-2 transition-colors duration-300',
+            'px-4 py-2 transition-colors duration-300 focus:outline-none',
             selectedPath
-              ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
+              ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20 focus-visible:bg-red-500/20 focus:ring-2'
               : 'bg-gray-500/10 text-gray-400 cursor-not-allowed',
           ]"
           :aria-disabled="!selectedPath"
